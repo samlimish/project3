@@ -40,7 +40,7 @@ For the modeling process, I chose random forest, K nearest neighbors, and logist
 For the random forest, I first created a function that outputted the model's training score, test score, and the confusion matrix when given the type of model and the training and test data for both x and y. 
 ![model_score](images/model_score_code.JPG)
 
-After I fitted the model with the training data for x and y, I used the above function to output the scores and the confusion matrix.
+After I fitted the model with the training data for x and y, I used the above function to output the scores and the confusion matrix.<br>
 ![rf_ms_smote](images/rf_ms_smote.JPG)
 ![rf_cm_smote](images/confusion_randforest_smoted.png)
 With the feature_importances_ attribute of the model, I created a bar graph that showed how much effect each variable had.
