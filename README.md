@@ -15,15 +15,15 @@ During the pandemic, people's livelihood and lifestyles have changed to a more s
 
 ## Data Cleaning / Data Preparation
 
-Before doing the train test split, I made sure that there were no missing values. After doing the train test split, I one hot encoded the categorical variables. I noticed that there were too many columns considering the number of categorical variables and their possible options.
+Before doing the train test split, I made sure that there were no missing values. After doing the train test split, I one hot encoded the categorical variables. I noticed that there were too many columns considering the number of categorical variables and their possible options.<br>
 
-![unique_obese](images/obese.JPG)
+![unique_obese](images/obese.JPG)<br>
 
-As can be seen, categorical variables: Veggies, Num_of_Meals, H2O, Physical_Activity, and Time_On_Devices had more than 1,000 possible options per variable. Below is a bar graph that shows each weight categories' weekly vegetable consumption. 1 being not consuming any or barely consuming vegetables; 2 is consuming vegetables occasionally during meals; 3 is consuming vegetables at least once in their daily diet. Even though it is a categorical variable, it almost seems to be a numerical variable.  
+As can be seen, categorical variables: Veggies, Num_of_Meals, H2O, Physical_Activity, and Time_On_Devices had more than 1,000 possible options per variable. Below is a bar graph that shows each weight categories' weekly vegetable consumption. 1 being not consuming any or barely consuming vegetables; 2 is consuming vegetables occasionally during meals; 3 is consuming vegetables at least once in their daily diet. Even though it is a categorical variable, it almost seems to be a numerical variable.  <br>
 
 ![veggies](images/veggies.JPG)
 
-Because of the said categorical variables resembled numerical variables, I decided to round the values to its nearest whole integer. 
+Because of the said categorical variables resembled numerical variables, I decided to round the values to its nearest whole integer. <br>
 ![rounding](images/rounding.JPG)
 
 <br><br>
@@ -42,22 +42,22 @@ For the random forest, I first created a function that outputted the model's tra
 
 After I fitted the model with the training data for x and y, I used the above function to output the scores and the confusion matrix.<br>
 ![rf_ms_smote](images/rf_ms_smote.JPG)
-![rf_cm_smote](images/confusion_randforest_smoted.png)
-With the feature_importances_ attribute of the model, I created a bar graph that showed how much effect each variable had.
+![rf_cm_smote](images/confusion_randforest_smoted.png)<br>
+With the feature_importances_ attribute of the model, I created a bar graph that showed how much effect each variable had.<br>
 ![rf_ms_unsmote](images/rf_ms_unsmote.JPG)
 ![rf_imp_smote](images/imp_randforest_smoted.png)
 
-The next two visuals are the un-SMOTE'd version of the data. Notice that the overall recall score has increased for the three categories. The bar graph showing each variables' importance also has some major changes, but we can see that Age is still the most important variable.
+The next two visuals are the un-SMOTE'd version of the data. Notice that the overall recall score has increased for the three categories. The bar graph showing each variables' importance also has some major changes, but we can see that Age is still the most important variable.<br>
 ![rf_cm_unsmote](images/confusion_randforest_unsmoted.png)
 ![rf_imp_unsmote](images/imp_randforest_unsmoted.png)
 
 
 #### Grid Search CV
-To find the best parameters for the random forest, a grid search was performed. Each type of the models had similar or same parameters for max depth, minimum samples leaf, and minimum samples split. The biggest difference for the grid search was that the model using the SMOTE'd data had 'gini' as its best criterion, and the model using un-SMOTE'd data had 'entropy' as its best criterion.
+To find the best parameters for the random forest, a grid search was performed. Each type of the models had similar or same parameters for max depth, minimum samples leaf, and minimum samples split. The biggest difference for the grid search was that the model using the SMOTE'd data had 'gini' as its best criterion, and the model using un-SMOTE'd data had 'entropy' as its best criterion.<br>
 ![rf_gs_smote](images/rf_gscv_smote.JPG)
 ![rf_gs_unsmote](images/rf_gscv_smote.JPG)
 
-The next images show the confusion matrices and the variable importance bar graph for each variant of the data. The first images show the changes to the confusion matrix and bar graph after the grid search had been performed, and the latter is the un-SMOTE'd version. Compared to the improvements seen in the SMOTE'd data, there isn't much improvement for the un-SMOTE'd data. 
+The next images show the confusion matrices and the variable importance bar graph for each variant of the data. The first images show the changes to the confusion matrix and bar graph after the grid search had been performed, and the latter is the un-SMOTE'd version. Compared to the improvements seen in the SMOTE'd data, there isn't much improvement for the un-SMOTE'd data. <br>
 ![rf_ms_smote](images/rf_ms_gscv_smote.JPG)
 ![rf_gs_smote](images/rfcm_gscv_smote.png)
 ![rf_gs_smote](images/imp_randforest2_smoted.png)
