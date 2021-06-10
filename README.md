@@ -54,14 +54,15 @@ The next two visuals are the un-SMOTE'd version of the data. Notice that the ove
 
 #### Grid Search CV
 To find the best parameters for the random forest, a grid search was performed. Each type of the models had similar or same parameters for max depth, minimum samples leaf, and minimum samples split. The biggest difference for the grid search was that the model using the SMOTE'd data had 'gini' as its best criterion, and the model using un-SMOTE'd data had 'entropy' as its best criterion.<br>
-![rf_gs_smote](images/rf_gscv_smote.JPG)
-![rf_gs_unsmote](images/rf_gscv_smote.JPG)
+![rf_gs_smote](images/rf_gscv_smoted.JPG)
+![rf_gs_unsmote](images/rf_gscv_unsmoted.JPG)
 
-The next images show the confusion matrices and the variable importance bar graph for each variant of the data. The first images show the changes to the confusion matrix and bar graph after the grid search had been performed, and the latter is the un-SMOTE'd version. Compared to the improvements seen in the SMOTE'd data, there isn't much improvement for the un-SMOTE'd data. <br>
+The next images show the confusion matrices and the variable importance bar graph for each variant of the data. The first images show the changes to the confusion matrix and bar graph after the grid search had been performed, and the latter is the un-SMOTE'd version. Interestingly, for the SMOTE'd version of the data, the precision and recall have slightly lower values after the grid search was performed, and while these values did not necessarily decrease, they did not show much chagnge. <br>
 ![rf_ms_smote](images/rf_ms_gscv_smote.JPG)
 ![rf_gs_smote](images/rfcm_gscv_smote.png)
 ![rf_gs_smote](images/imp_randforest2_smoted.png)
 <br>
+Compared to the improvements seen in the SMOTE'd data, there isn't much improvement for the un-SMOTE'd data. <br>
 ![rf_ms_smote](images/rf_ms_gscv_unsmote.JPG)
 ![rf_gs_unsmote](images/rfcm_gscv_unsmoted.png)
 ![rf_gs_unsmote](images/imp_randforest2_unsmoted.png)
@@ -69,9 +70,52 @@ The next images show the confusion matrices and the variable importance bar grap
 
 
 ### K-Nearest-Neighbors
+The k-nearest neighbors model classifies a data point using the distance between it and its neighbors. But in order to use this classifier, our numerical variables need to be standardized so that the size of each variable's values does not affect how much influence that variable has. The first standard scaler only scales the individuals' age as that is the only numerical variable. The second standard scaler has more columns because those variables, excluding age, were categorical variables that are now considered numerical. <br>
+
+![standard_scaler](images/stdscaler.JPG)<br>
+
+The next images show how each variant of the data is fitted and its overall model score. <br>
+![knn_smote](images/knn_smote.JPG)
+![knn_unsmote](images/knn_unsmote.JPG)<br>
+
+Both versions of the model show that the model does not do well when predicting 'Overweight' category, and like the random forest model, the un-SMOTE'd version of the data performs substantially better than the SMOTE'd version. For both variants, we can see that the model was slightly over fitted, but also displays similarly high score for the test score. <br>
+
+#### Grid Search CV
+A grid search was performed again to find the best parameters for the KNN model. The first is the SMOTE'd version of the data and the latter is the un-SMOTE'd version of the data. Unlike the random forest model, this model showed much improvement for both variation of the data after the grid search was performed. 
+<br>
+![knn_gs_smote](images/knn_param_smote.JPG)
+![knn_gs_smote2](images/knn_param2_smote.JPG)
+![knn_ms_gs_smote](images/knn_gs_smote.JPG)
+<br><br>
+![knn_gs_unsmote](images/knn_param_unsmote.JPG)
+![knn_gs_unsmote2](images/knn_param2_unsmote.JPG)
+![knn_ms_gs_unsmote](images/knn_gs_smote.JPG)
+<br>
+
 
 ### Logistic Regression
+Like the KNN model, the logistic regression also requires the data to be scaled. Because of the nature of logarithms, the values of our data must be between 0 and 1; this can be achieved by using the MinMaxScaler. Because we had one hot encoded our data, we know that each column of the categorical data have values of either 0 or 1, so these do not need to be scaled. In the SMOTE'd version of the data, Age is the only column that needs to be scaled as it is the only numerical variable; however, in the un-SMOTE'd version of the data, multiple columns needed to be normalized.
+
+![minmax](images/minmax.JPG)
+![log_smote](images/log_smote.JPG)
+![log_unsmote](images/log_unsmote.JPG)
+
+#### Grid Search CV
+![log_gs_smote](images/log_gs_smote.JPG)
+![log_gs_unsmote](images/log_gs_unsmote.JPG)
+
+
+
 
 ## Results
 
+
+
+
 ## Conclusion
+
+
+
+
+
+
