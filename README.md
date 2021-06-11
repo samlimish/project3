@@ -15,19 +15,18 @@ During the pandemic, people's livelihood and lifestyles have changed to a more s
 
 ## Data Cleaning / Data Preparation
 
-Before doing the train test split, I made sure that there were no missing values. After doing the train test split, I one hot encoded the categorical variables. I noticed that there were too many columns considering the number of categorical variables and their possible options.<br>
+Before doing the train test split, I made sure that there were no missing values. After doing the train test split, I one hot encoded the categorical variables. I noticed that there were too many columns considering the number of categorical variables and their possible options. After the first review of the project with my instructor, we decided to create another data frame that was the exact copy of the original data frame before the rounding process. Also, we decided to consider the categorical variables resembling numerical variables to be numerical because these variables were SMOTE'd. Another aspect that we changed was the number of weight classes in the dependent variable. Originally, individuals were divided into insufficient; normal; overweight levels 1 and 2; and obesity type 1,2, and 3. The large number of possible outcomes reduced the models' accuracy and made it difficult to compare how much the variables affected between the different weight categories. <br>
 
 ![unique_obese](images/obese.JPG)<br>
 
 As can be seen, categorical variables: Veggies, Num_of_Meals, H2O, Physical_Activity, and Time_On_Devices had more than 1,000 possible options per variable. Below is a bar graph that shows each weight categories' weekly vegetable consumption. 1 being not consuming any or barely consuming vegetables; 2 is consuming vegetables occasionally during meals; 3 is consuming vegetables at least once in their daily diet. Even though it is a categorical variable, it almost seems to be a numerical variable.  <br>
 
-![veggies](images/veggies.JPG)
+![veggies](images/veggies.JPG)<br>
 
 Because of the said categorical variables resembled numerical variables, I decided to round the values to its nearest whole integer. <br>
 ![rounding](images/rounding.JPG)
-
-<br><br>
-After discussing the project with my instructor, we decided to create another data frame that was the exact copy of the original data frame before the rounding process. Also, we decided to consider the categorical variables resembling numerical variables to be numerical because these variables were SMOTE'd. Another aspect that we changed was the number of weight classes in the dependent variable. Originally, individuals were divided into insufficient; normal; overweight levels 1 and 2; and obesity type 1,2, and 3. The large number of possible outcomes reduced the models' accuracy and made it difficult to compare how much the variables affected between the different weight categories. 
+<br>
+After the rounding, we use get_dummies function from Pandas to encode our categorical data. Each value of the categorical variable is turned into a column whose values are either 0 and 1 to represent a False or a True. We drop the first column of each categorical variables to reduce redundency. And because the second(un-SMOTE'd) data frame has less categorical variables, another list is created to specify which columns need to be encoded.
 <br>
 
 
@@ -98,12 +97,25 @@ Like the KNN model, the logistic regression also requires the data to be scaled.
 
 ![minmax](images/minmax.JPG)
 ![log_smote](images/log_smote.JPG)
-![log_unsmote](images/log_unsmote.JPG)
+![log_unsmote](images/log_unsmote.JPG)<br>
+
+Surprisingly, there isn't much difference when comparing the recall rate for both variations, and the SMOTE'd version performed slightly better for predicting a person in the Overweight category than the un-SMOTE'd version. The un-SMOTE'd version has a slight upper hand in the precision score, but the difference is miniscule. <br>
 
 #### Grid Search CV
+Our models' score does not improve much, if at all, for both SMOTE'd and un-SMOTE'd data when using grid search. In fact, the precision and recall scores are exactly the same for the un-SMOTE'd data.<br>
 ![log_gs_smote](images/log_gs_smote.JPG)
-![log_gs_unsmote](images/log_gs_unsmote.JPG)
+![log_gs_unsmote](images/log_gs_unsmote.JPG)<br>
+Next we use the get_coef function that we made to output bar graphs of the regression coefficients of the variables between two weight categories. The first half of the 6 images will be SMOTE'd data and the latter, un-SMOTE'd. The first picture of each group will be comparing the Normal Weight category to the Overweight category, the second will compare the Overweight category to the Obese category, and the last will compare the Obese category to the Normal Weight category.  
 
+##### SMOTE'd
+![coef0](images/coef0.png)
+![coef1](images/coef1.png)
+![coef2](images/coef2.png)
+
+##### Un-SMOTE'd
+![coef0_2](images/coef0_2.png)
+![coef1_2](images/coef1_2.png)
+![coef2_2](images/coef2_2.png)
 
 
 
