@@ -40,14 +40,13 @@ For the random forest, I first created a function that outputted the model's tra
 ![model_score](images/model_score_code.JPG)
 
 After I fitted the model with the training data for x and y, I used the above function to output the scores and the confusion matrix.<br>
-![rf_ms_smote](images/rf_ms_smote.JPG)
-![rf_cm_smote](images/confusion_randforest_smoted.png)<br>
+![rf_smote](images/rf_smote.JPG)
+<br>
 With the feature_importances_ attribute of the model, I created a bar graph that showed how much effect each variable had.<br>
-![rf_ms_unsmote](images/rf_ms_unsmote.JPG)
-![rf_imp_smote](images/imp_randforest_smoted.png)
-
-The next two visuals are the un-SMOTE'd version of the data. Notice that the overall recall score has increased for the three categories. The bar graph showing each variables' importance also has some major changes, but we can see that Age is still the most important variable.<br>
-![rf_cm_unsmote](images/confusion_randforest_unsmoted.png)
+![rf_impor_unsmote](images/imp_randforest_smoted.png)
+<br>
+The next visuals are the un-SMOTE'd version of the data. Notice that the overall recall score has increased for the three categories. The bar graph showing each variables' importance also has some major changes, but we can see that Age is still the most important variable.<br>
+![rf_unsmote](images/rf_unsmote.JPG)
 ![rf_imp_unsmote](images/imp_randforest_unsmoted.png)
 
 
@@ -105,7 +104,7 @@ Surprisingly, there isn't much difference when comparing the recall rate for bot
 Our models' score does not improve much, if at all, for both SMOTE'd and un-SMOTE'd data when using grid search. In fact, the precision and recall scores are exactly the same for the un-SMOTE'd data.<br>
 ![log_gs_smote](images/log_gs_smote.JPG)
 ![log_gs_unsmote](images/log_gs_unsmote.JPG)<br>
-Next we use the get_coef function that we made to output bar graphs of the regression coefficients of the variables between two weight categories. The first half of the 6 images will be SMOTE'd data and the latter, un-SMOTE'd. The first picture of each group will be comparing the Normal Weight category to the Overweight category, the second will compare the Overweight category to the Obese category, and the last will compare the Obese category to the Normal Weight category.  
+Next we use the get_coef function that we made to output bar graphs of the regression coefficients of the variables between two weight categories. The first half of the 6 images will be SMOTE'd data and the latter, un-SMOTE'd. The first picture of each group will be comparing the Normal Weight category to the Overweight category, the second will compare the Overweight category to the Obese category, and the last will compare the Obese category to the Normal Weight category.
 
 ##### SMOTE'd
 ![coef0](images/coef0.png)
@@ -116,18 +115,35 @@ Next we use the get_coef function that we made to output bar graphs of the regre
 ![coef0_2](images/coef0_2.png)
 ![coef1_2](images/coef1_2.png)
 ![coef2_2](images/coef2_2.png)
+<br>
 
 
 
 ## Results
-
+ - Across all models for both variations of the data, Age was the most decisive factor for a person's obesity category. 
+ - The random forest model performed the best in terms of precision and recall; however, it was overfitted even before performing the grid search.
+ - While there are uncontrollable factors such as age and family history of obesity that affect a person's obesity level, controllable factors such as eating more vegetables, drinking more water, eating less food with high calories and inbetween meals, and being physically active were shown to reduce a person's obesity level.
 
 
 
 ## Conclusion
+The biggest challenge for this project was determining how the variables needed to be modified in order to get reasonable outcomes. For example, the dependent variable initially had seven different possible outcomes. Insufficient weight, normal weight, overweight types 1 and 2, and obesity levels of 1, 2, and 3. By reducing the number of possible outcomes to 3: normal weight, overweight, and obese; confusion matrices of the random forest, k nearest neighbors, and the logistic regression models were able to return a clearer and easy to understand outputs. In the SMOTE'd version of the data, we are able to see that age and family history of obesity play the largest role in determining a person's obesity level through random forest and k-nearest-neighbors models. <br>
 
+After un-SMOTE'ing the data, age continuously proved to be the most determining factor, but more controllable factors such as reducing the number of meals or eating vegetables were shown to also have a large impact on a person's obesity level. <br>
 
+For both the SMOTE'd and un-SMOTE'd versions of the data, the logistic regression model did not perform as well especially when predicting individuals in the Obese category. The reason is because logistic regression models specialize in binary data, but ours had three possible outcomes. When taking this into account, the logistic regression model performed well. Since the confusion matrix did not offer much insight, we shift our attention to the regression coefficients. These coefficients tells us how much effect each variable has when comparing between different obesity levels. 
 
+Overall, I found that random forest was able to provide the most accurate results; however, for both the random forest and the k nearest neighbors, the models are over-fitted as can be seen through the high training scores above the confusion matrices. Therefore, the random forest model may have such higher accuracy only on this specific dataset.  
+
+### Recommendation
+In this section, I plan on recommending which models seem to be the best for the clients depending on what the client is looking for, as well as recommending what individuals should do to lower their weight category. 
+
+#### Random Forest
+ - If the goal for the clients is to be able to predict an individual's weight(obesity) category, I would recommend using the random forest model as it was able to provide the highest precision and recall scores. 
+ - Another tool that the random forest model provides is the feature importance, or the extent in which the variables affect a person's weight category. 
+ 
+#### Habit Recommendations
+ - While it seems obvious that healthier lifestyle choices such as eating more vegetables, drinking sufficient amounts of water, or eating less high caloric food will reduce a person's obesity level, we are now able to quantify how much these habits affect a person's obesity level. Even habits such as calorie counting was shown to have a positive impact. It's always easier said than done, but by making small changes to our daily habits, we could see gradual improvements.
 
 
 
